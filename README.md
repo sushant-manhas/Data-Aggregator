@@ -1,4 +1,4 @@
-# 🎈 Blank app template
+# 🎈 Streamlit App for Data retrieval
 
 A simple Streamlit app template for you to modify!
 
