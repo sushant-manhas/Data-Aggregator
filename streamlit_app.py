@@ -9,7 +9,7 @@ from dateutil.relativedelta import relativedelta
 st.title("Parcl Real Estate Price Analysis")
 
 # User Input for End Date
-end_date = st.date_input("Select the Date", value=datetime.now())
+end_date = st.date_input("Select the Date", value="2024-12-10")
 
 # API Key Setup (Replace with your method to fetch the key securely)
 api_key = st.secrets["PARCL_LABS_API_KEY"]  # Use Streamlit secrets for sensitive data
@@ -75,9 +75,11 @@ def fetch_and_process_data():
     yoy_ytd_df["YTD Change %"] = ((yoy_ytd_df["price_feed"] - yoy_ytd_df["start_of_year_price"]) / yoy_ytd_df["start_of_year_price"]) * 100
 
     final_df = yoy_ytd_df.drop_duplicates(subset=["friendly_name"])[["parcl_id", "friendly_name", "state", "boundary_type", "date", "price_feed", "YoY Change %", "YTD Change %"]]
-
+    final_df["YoY Change %"] = final_df["YoY Change %"].round(2)
+    final_df["YTD Change %"] = final_df["YTD Change %"].round(2)
+    
     # Display Data
-    st.write("Latest YoY and YTD Changes:")
+    st.write("PriceFeed Data:")
     st.dataframe(final_df)
 
     # Downloadable Excel File
