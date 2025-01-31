@@ -41,10 +41,10 @@ def fetch_and_process_data():
             auto_paginate=True
         )
 
-    start_date = start_date.strftime('%Y-%m-%d')
+    start_date_str = start_date.strftime('%Y-%m-%d')
     end_date_str = end_date.strftime('%Y-%m-%d')
 
-    sales_price_feeds = fetch_price_feed_data(sales_pricefeed_parcl_ids, start_date, end_date_str)
+    sales_price_feeds = fetch_price_feed_data(sales_pricefeed_parcl_ids, start_date_str, end_date_str)
 
     # Merge and Prepare Data
     df = sales_price_feeds.merge(
